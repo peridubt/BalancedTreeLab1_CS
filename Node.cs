@@ -15,8 +15,8 @@ namespace BalancedTreeLab
         public Node(T node = default(T)) 
         {
             Data = node;
-            this.left = null;
-            this.right = null;
+            left = null;
+            right = null;
         }
 
         public override string ToString()

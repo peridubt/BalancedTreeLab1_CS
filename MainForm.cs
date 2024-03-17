@@ -1,4 +1,5 @@
 ﻿using BalacnedTree;
+using System.Windows.Forms;
 
 namespace BalancedTreeLab
 {
@@ -290,40 +291,44 @@ namespace BalancedTreeLab
                 }
             }
         }
-
-        private void ExistsTemplate<T>(string targetType, UtilsCheckDelegate<T> check,
-            ITree<T> unmutableTree, ITree<T> tree, string message) where T : IComparable<T>
+        private void ExistsEvenValue_Click(object sender, EventArgs e)
         {
             if (type == "")
                 MessageBox.Show("Tree node type is not chosen!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                if (type != targetType)
-                    MessageBox.Show($"Tree node target type is not {targetType}!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (type != "int")
+                    MessageBox.Show($"Tree node target type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
                     bool exists;
                     if (unmutable)
-                        exists = TreeUtils<T>.Exists(unmutableTree, check.Invoke);
+                        exists = TreeUtils<int>.Exists(unmutableTreeInt, node => node.Data % 2 == 0);
                     else
-                        exists = TreeUtils<T>.Exists(tree, check.Invoke);
-                    textBox.Text = $"{message}: {exists}";
+                        exists = TreeUtils<int>.Exists(_treeInt, node => node.Data % 2 == 0);
+                    textBox.Text = $"Tree contains at least one even value: {exists}";
                 }
             }
         }
 
-        private void ExistsEvenValue_Click(object sender, EventArgs e)
-        {
-            ExistsTemplate("int", node => node.Data % 2 == 0,
-                unmutableTreeInt, _treeInt,
-                "Tree contains at least one even value");
-        }
-
         private void ExistsOddValue_Click(object sender, EventArgs e)
         {
-            ExistsTemplate("int", node => node.Data % 2 == 1,
-                unmutableTreeInt, _treeInt,
-                "Tree contains at least one odd value");
+            if (type == "")
+                MessageBox.Show("Tree node type is not chosen!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                if (type != "int")
+                    MessageBox.Show($"Tree node target type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    bool exists;
+                    if (unmutable)
+                        exists = TreeUtils<int>.Exists(unmutableTreeInt, node => node.Data % 2 == 1);
+                    else
+                        exists = TreeUtils<int>.Exists(_treeInt, node => node.Data % 2 == 1);
+                    textBox.Text = $"Tree contains at least one even value: {exists}";
+                }
+            }
         }
 
         private void ExistsWithSubstring_Click(object sender, EventArgs e)
