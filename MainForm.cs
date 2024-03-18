@@ -16,7 +16,6 @@ namespace BalancedTreeLab
 
         delegate void ModificationDelegate<T>(T data);
         delegate void UtilsActionDelegate<T>(Node<T> node);
-        delegate bool UtilsCheckDelegate<T>(Node<T> node);
 
         private string TreeBefore = string.Empty;
         private string TreeAfter = string.Empty;
@@ -138,7 +137,6 @@ namespace BalancedTreeLab
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 textBox.Text += "Failure!\r\n";
             }
-
         }
 
         private void AddNode_Click(object sender, EventArgs e)
