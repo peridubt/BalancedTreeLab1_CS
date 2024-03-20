@@ -33,12 +33,12 @@ namespace BalancedTreeLab
             string result = string.Empty;
             if (node != null)
             {
-                result += PrintTreeRec(node.right, level + 1);
+                result += PrintTreeRec(node.Right, level + 1);
                 result += "\r\n";
                 for (int i = 0; i < level; i++)
                     result += $"       ";
                 result += node.Data.ToString();
-                result += PrintTreeRec(node.left, level + 1);
+                result += PrintTreeRec(node.Left, level + 1);
             }
             return result;
         }

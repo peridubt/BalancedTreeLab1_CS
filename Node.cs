@@ -9,19 +9,24 @@ namespace BalancedTreeLab
     public class Node<T>
     {
         public T Data { get; set; }
-        public Node<T> left; // ссылка на левое поддерево
-        public Node<T> right; // ссылка на правое поддерево
+        public Node<T> Left; // ссылка на левое поддерево
+        public Node<T> Right; // ссылка на правое поддерево
+        public int Height;
 
         public Node(T node = default(T)) 
         {
             Data = node;
-            left = null;
-            right = null;
+            Left = null;
+            Right = null;
+            Height = 1;
         }
 
         public override string ToString()
         {
             return Data.ToString();
         }
+
+        
+
     }
 }
