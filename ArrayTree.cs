@@ -1,6 +1,5 @@
 ﻿using BalacnedTree;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace BalancedTreeLab
 {
@@ -13,8 +12,11 @@ namespace BalancedTreeLab
         public IEnumerable<Node<T>> Nodes { get => arr; set => Nodes = value; }
 
         private int levels = 0;
-        private int GetLeftChildIndex(int elementIndex) => 2 * elementIndex + 1;
-        private int GetRightChildIndex(int elementIndex) => 2 * elementIndex + 2;
+        private int LeftChildIndex(int i) => 2 * i + 1;
+        private int RightChildIndex(int i) => 2 * i + 2;
+
+        private bool HasLeftChild(int i) => 2 * i + 1 < capacity;
+        private bool HasRightChild(int i) => 2 * i + 2 < capacity;
 
         public ArrayTree()
         {
@@ -96,12 +98,12 @@ namespace BalancedTreeLab
         {
             if (node != null && i < capacity)
             {
-                if (node.Left != null && GetLeftChildIndex(i) < capacity)
-                    arr[GetLeftChildIndex(i)] = node.Left;
-                if (node.Right != null && GetRightChildIndex(i) < capacity)
-                    arr[GetRightChildIndex(i)] = node.Right;
-                RearrangeArr(node.Left, GetLeftChildIndex(i));
-                RearrangeArr(node.Right, GetRightChildIndex(i));
+                if (node.Left != null && HasLeftChild(i))
+                    arr[LeftChildIndex(i)] = node.Left;
+                if (node.Right != null && HasRightChild(i))
+                    arr[RightChildIndex(i)] = node.Right;
+                RearrangeArr(node.Left, LeftChildIndex(i));
+                RearrangeArr(node.Right, RightChildIndex(i));
             }
         }
 
@@ -160,6 +162,10 @@ namespace BalancedTreeLab
 
         public void Remove(T data)
         {
+            if (IsEmpty)
+                throw new TreeElementRemovalDenial("Cannot remove element from an empty tree");
+            if (data == null || !Contains(data))
+                throw new TreeElementRemovalDenial("Cannot remove a non-existent element");
             Count--;
             if (Count > 1)
                 Array.Clear(arr, 1, capacity - 1);

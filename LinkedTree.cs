@@ -9,7 +9,7 @@ namespace BalancedTreeLab
         private Node<T> root = null;
 
         private List<Node<T>> list = new List<Node<T>>();
-        public int Count { get => list.Count;}
+        public int Count { get => list.Count; }
         public bool IsEmpty { get => Count == 0; }
         public IEnumerable<Node<T>> Nodes { get => list; set => Nodes = value; }
 
@@ -45,7 +45,7 @@ namespace BalancedTreeLab
             return t;
         }
 
-        private Node<T> RotateLeft(Node<T> node) // левый поворот вокруг q
+        private Node<T> RotateLeft(Node<T> node)
         {
             Node<T> t = node.Right;
             node.Right = t.Left;
@@ -97,7 +97,7 @@ namespace BalancedTreeLab
             }
         }
 
-        public void Add(T data)  
+        public void Add(T data)
         {
             root = AddToRoot(root, data);
             SwapRoot();
@@ -131,7 +131,7 @@ namespace BalancedTreeLab
                 node.Left = RemoveFromRoot(node.Left, data);
             else if (data.CompareTo(node.Data) > 0)
                 node.Right = RemoveFromRoot(node.Right, data);
-            else 
+            else
             {
                 Node<T> p = node.Left;
                 Node<T> q = node.Right;
@@ -149,6 +149,10 @@ namespace BalancedTreeLab
 
         public void Remove(T data)
         {
+            if (IsEmpty)
+                throw new TreeElementRemovalDenial("Cannot remove element from an empty tree");
+            if (data == null || !Contains(data))
+                throw new TreeElementRemovalDenial("Cannot remove a non-existent element");
             root = RemoveFromRoot(root, data);
             SwapRoot();
         }

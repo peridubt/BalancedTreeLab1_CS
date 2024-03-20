@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BalancedTreeLab
 {
     public class Node<T>
@@ -13,7 +8,7 @@ namespace BalancedTreeLab
         public Node<T> Right; // ссылка на правое поддерево
         public int Height;
 
-        public Node(T node = default(T)) 
+        public Node(T node = default(T))
         {
             Data = node;
             Left = null;
@@ -25,8 +20,5 @@ namespace BalancedTreeLab
         {
             return Data.ToString();
         }
-
-        
-
     }
 }
