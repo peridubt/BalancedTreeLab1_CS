@@ -1,11 +1,5 @@
 ﻿using BalacnedTree;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace BalancedTreeLab
 {
@@ -23,63 +17,33 @@ namespace BalancedTreeLab
 
         public LinkedTree() { }
 
-        private Node<T> BalanceOut(int count, IEnumerator<Node<T>> node)
+        private void BalancedAdd(int count, ref Node<T> node, T data)
         {
-            Node<T> result = null;
             if (count != 0)
             {
                 int count_left = count / 2;
                 int count_right = count - count_left - 1;
-                result = new Node<T> { Data = node.Current.Data };
-                node.MoveNext();
-                result.left = BalanceOut(count_left, node);
-                result.right = BalanceOut(count_right, node);
+                if (node == null)
+                {
+                    node = new Node<T>(data);
+                    list.AddLast(node);
+                    return;
+                }
+                BalancedAdd(count_left, ref node.left, data);
+                BalancedAdd(count_right, ref node.right, data);
             }
-            return result;
         }
-        // добавление и удаление посмотреть в интернете
-        public void Add(T node)  // посмотреть, нужно ли делать перебалансировку дерева
+
+        public void Add(T node)
         {
-            /*if (root == null)
+            Count++;
+            if (root == null)
             {
                 root = new Node<T>(node);
-                list.Add(root);
-                Count++;
+                list.AddLast(root);
                 return;
             }
-            MyQueue<Node<T>> q = new MyQueue<Node<T>>();
-            Node<T> temp = root;
-            q.Enqueue(temp);
-
-            while (q.Count != 0)
-            {
-                temp = q.Peek();
-                q.Dequeue();
-
-                if (temp.left == null)
-                {
-                    temp.left = new Node<T>(node);
-                    list.Add(temp.left);
-                    break;
-                }
-                else
-                    q.Enqueue(temp.left);
-
-                if (temp.right == null)
-                {
-                    temp.right = new Node<T>(node);
-                    list.Add(temp.right);
-                    break;
-                }
-                else
-                    q.Enqueue(temp.right);
-            }*/
-            list.AddLast(new Node<T> { Data = node });
-            Count++;
-            IEnumerator<Node<T>> enumerator = list.GetEnumerator();
-            enumerator.MoveNext();
-            root = BalanceOut(Count, enumerator);
-            list.RemoveFirst(); list.AddFirst(root);
+            BalancedAdd(Count, ref root, node);
         }
 
         Node<T> FindFirstEntry(T data)
@@ -94,15 +58,14 @@ namespace BalancedTreeLab
         {
             if (root == null)
                 throw new TreeElementRemovalDenial("Cannot remove node from empty tree");
-            if (!Contains(node))
+            if (node == null || !Contains(node))
                 throw new TreeElementRemovalDenial("Cannot remove a non-existent element");
 
-            list.Remove(FindFirstEntry(node));
+            /*list.Remove(FindFirstEntry(node));
             IEnumerator<Node<T>> enumerator = list.GetEnumerator();
             enumerator.MoveNext();
-            root = BalanceOut(Count, enumerator);
             list.RemoveFirst(); list.AddFirst(root);
-            Count--;
+            Count--;*/
         }
 
         public bool Contains(T node)

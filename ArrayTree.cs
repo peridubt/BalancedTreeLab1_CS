@@ -29,19 +29,6 @@ namespace BalancedTreeLab
             arr = new Node<T>[capacity];
         }
 
-        // надо посмотреть создание дерева через массив
-
-        /* при добавлении определить, кем является добавляемый элемент: левым и правым потомком
-             и найти его родителя
-             левый потомок расположен в ячейке по адресу [i*2], а правый - в [i*2 + 1]
-             */
-        /*
-         1. Создаётся узел
-         2. Ищется место для вставки, т.е. узел, который является листом (найти родителя для новго узла) 
-            и привязать этот узел к родителю. Если родитель найден на i элементе и у него нет левого потомка,
-            то новый элемент записывается на 2 * i, а если есть левый, но нет правого, то на 2 * i + 1
-         */
-
         private void SwitchNodes()
         {
             int border = capacity - (int)Math.Pow(2, levels);
@@ -140,8 +127,8 @@ namespace BalancedTreeLab
                 throw new TreeElementRemovalDenial("Cannot remove element from an empty tree");
             if (node == null || !Contains(node))
                 throw new TreeElementRemovalDenial("Cannot remove non-existent element");
-            DeleteFromArray(node);
-            SwitchNodes();
+            /*DeleteFromArray(node);
+            SwitchNodes();*/
         }
 
         public bool Contains(T node)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BalancedTreeLab
 {
     public class TreeException : Exception
@@ -28,6 +23,12 @@ namespace BalancedTreeLab
     {
         public TreeCreationException() { }
         public TreeCreationException(string message) : base(message) { }
+    }
+
+    public class TreeUtilsException : TreeException
+    {
+        public TreeUtilsException() { }
+        public TreeUtilsException(string message) : base(message) { }
     }
 
 }

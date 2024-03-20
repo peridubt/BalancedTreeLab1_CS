@@ -1,5 +1,4 @@
 ﻿using BalacnedTree;
-using System.Windows.Forms;
 
 namespace BalancedTreeLab
 {
@@ -299,12 +298,19 @@ namespace BalancedTreeLab
                     MessageBox.Show($"Tree node target type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    bool exists;
-                    if (unmutable)
-                        exists = TreeUtils<int>.Exists(unmutableTreeInt, node => node.Data % 2 == 0);
-                    else
-                        exists = TreeUtils<int>.Exists(_treeInt, node => node.Data % 2 == 0);
-                    textBox.Text = $"Tree contains at least one even value: {exists}";
+                    try
+                    {
+                        bool exists;
+                        if (unmutable)
+                            exists = TreeUtils<int>.Exists(unmutableTreeInt, node => node.Data % 2 == 0);
+                        else
+                            exists = TreeUtils<int>.Exists(_treeInt, node => node.Data % 2 == 0);
+                        textBox.Text = $"Tree contains at least one even value: {exists}";
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -319,12 +325,19 @@ namespace BalancedTreeLab
                     MessageBox.Show($"Tree node target type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    bool exists;
-                    if (unmutable)
-                        exists = TreeUtils<int>.Exists(unmutableTreeInt, node => node.Data % 2 == 1);
-                    else
-                        exists = TreeUtils<int>.Exists(_treeInt, node => node.Data % 2 == 1);
-                    textBox.Text = $"Tree contains at least one even value: {exists}";
+                    try
+                    {
+                        bool exists;
+                        if (unmutable)
+                            exists = TreeUtils<int>.Exists(unmutableTreeInt, node => node.Data % 2 == 1);
+                        else
+                            exists = TreeUtils<int>.Exists(_treeInt, node => node.Data % 2 == 1);
+                        textBox.Text = $"Tree contains at least one even value: {exists}";
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -339,17 +352,24 @@ namespace BalancedTreeLab
                     MessageBox.Show("Tree node type is not string!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
+                    try
+                    { 
                     bool exists;
                     var form = new ElementEntry<string>();
                     string elem = string.Empty;
-                    if (form.ShowDialog() == DialogResult.OK)
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            elem = ElementEntry<string>.Element;
+                            if (unmutable == true)
+                                exists = TreeUtils<string>.Exists(unmutableTreeStr, node => node.Data.Contains(elem));
+                            else
+                                exists = TreeUtils<string>.Exists(_treeStr, node => node.Data.Contains(elem));
+                            textBox.Text = $"Tree contains at least one value with substring \"{elem}\": {exists}";
+                        }
+                    }
+                    catch (TreeException ex)
                     {
-                        elem = ElementEntry<string>.Element;
-                        if (unmutable == true)
-                            exists = TreeUtils<string>.Exists(unmutableTreeStr, node => node.Data.Contains(elem));
-                        else
-                            exists = TreeUtils<string>.Exists(_treeStr, node => node.Data.Contains(elem));
-                        textBox.Text = $"Tree contains at least one value with substring \"{elem}\": {exists}";
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -365,14 +385,21 @@ namespace BalancedTreeLab
                     MessageBox.Show("Tree node type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    ITree<int> tree;
+                    try
+                    {
+                        ITree<int> tree;
 
-                    if (unmutable)
-                        tree = TreeUtils<int>.FindAll(unmutableTreeInt, node => node.Data % 2 == 0, () => new ArrayTree<int>());
-                    else
-                        tree = TreeUtils<int>.FindAll(_treeInt, node => node.Data % 2 == 0, () => new ArrayTree<int>());
-                    ViewExecution(tree);
-                    View_Click(sender, e);
+                        if (unmutable)
+                            tree = TreeUtils<int>.FindAll(unmutableTreeInt, node => node.Data % 2 == 0, () => new ArrayTree<int>());
+                        else
+                            tree = TreeUtils<int>.FindAll(_treeInt, node => node.Data % 2 == 0, () => new ArrayTree<int>());
+                        ViewExecution(tree);
+                        View_Click(sender, e);
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -387,14 +414,21 @@ namespace BalancedTreeLab
                     MessageBox.Show("Tree node type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    ITree<int> tree;
+                    try
+                    {
+                        ITree<int> tree;
 
-                    if (unmutable)
-                        tree = TreeUtils<int>.FindAll(unmutableTreeInt, node => node.Data % 2 == 1, () => new ArrayTree<int>());
-                    else
-                        tree = TreeUtils<int>.FindAll(_treeInt, node => node.Data % 2 == 1, () => new ArrayTree<int>());
-                    ViewExecution(tree);
-                    View_Click(sender, e);
+                        if (unmutable)
+                            tree = TreeUtils<int>.FindAll(unmutableTreeInt, node => node.Data % 2 == 1, () => new ArrayTree<int>());
+                        else
+                            tree = TreeUtils<int>.FindAll(_treeInt, node => node.Data % 2 == 1, () => new ArrayTree<int>());
+                        ViewExecution(tree);
+                        View_Click(sender, e);
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -409,18 +443,25 @@ namespace BalancedTreeLab
                     MessageBox.Show($"Tree node type is not string!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    ITree<string> tree;
-                    var form = new ElementEntry<string>();
-                    string elem = string.Empty;
-                    if (form.ShowDialog() == DialogResult.OK)
+                    try
                     {
-                        elem = ElementEntry<string>.Element;
-                        if (unmutable)
-                            tree = TreeUtils<string>.FindAll(unmutableTreeStr, node => node.Data.Contains(elem), () => new ArrayTree<string>());
-                        else
-                            tree = TreeUtils<string>.FindAll(_treeStr, node => node.Data.Contains(elem), () => new ArrayTree<string>());
-                        ViewExecution(tree);
-                        View_Click(sender, e);
+                        ITree<string> tree;
+                        var form = new ElementEntry<string>();
+                        string elem = string.Empty;
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            elem = ElementEntry<string>.Element;
+                            if (unmutable)
+                                tree = TreeUtils<string>.FindAll(unmutableTreeStr, node => node.Data.Contains(elem), () => new ArrayTree<string>());
+                            else
+                                tree = TreeUtils<string>.FindAll(_treeStr, node => node.Data.Contains(elem), () => new ArrayTree<string>());
+                            ViewExecution(tree);
+                            View_Click(sender, e);
+                        }
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -503,12 +544,19 @@ namespace BalancedTreeLab
                     MessageBox.Show($"Tree node type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    bool checkResult;
-                    if (unmutable)
-                        checkResult = TreeUtils<int>.CheckForAll(unmutableTreeInt, node => node.Data % 2 == 0);
-                    else
-                        checkResult = TreeUtils<int>.CheckForAll(_treeInt, node => node.Data % 2 == 0);
-                    textBox.Text = $"Tree consists only of even values: {checkResult}.\r\n";
+                    try
+                    {
+                        bool checkResult;
+                        if (unmutable)
+                            checkResult = TreeUtils<int>.CheckForAll(unmutableTreeInt, node => node.Data % 2 == 0);
+                        else
+                            checkResult = TreeUtils<int>.CheckForAll(_treeInt, node => node.Data % 2 == 0);
+                        textBox.Text = $"Tree consists only of even values: {checkResult}.\r\n";
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -523,12 +571,19 @@ namespace BalancedTreeLab
                     MessageBox.Show($"Tree node type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    bool checkResult;
-                    if (unmutable)
-                        checkResult = TreeUtils<int>.CheckForAll(unmutableTreeInt, node => node.Data % 2 == 1);
-                    else
-                        checkResult = TreeUtils<int>.CheckForAll(_treeInt, node => node.Data % 2 == 1);
-                    textBox.Text = $"Tree consists only of odd values: {checkResult}.\r\n";
+                    try
+                    {
+                        bool checkResult;
+                        if (unmutable)
+                            checkResult = TreeUtils<int>.CheckForAll(unmutableTreeInt, node => node.Data % 2 == 1);
+                        else
+                            checkResult = TreeUtils<int>.CheckForAll(_treeInt, node => node.Data % 2 == 1);
+                        textBox.Text = $"Tree consists only of odd values: {checkResult}.\r\n";
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -543,17 +598,24 @@ namespace BalancedTreeLab
                     MessageBox.Show($"Tree node type is not integer!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    bool checkResult;
-                    var form = new ElementEntry<string>();
-                    string elem = string.Empty;
-                    if (form.ShowDialog() == DialogResult.OK)
+                    try
                     {
-                        elem = ElementEntry<string>.Element;
-                        if (unmutable)
-                            checkResult = TreeUtils<string>.CheckForAll(unmutableTreeStr, node => node.Data.Contains(elem));
-                        else
-                            checkResult = TreeUtils<string>.CheckForAll(_treeStr, node => node.Data.Contains(elem));
-                        textBox.Text = $"Tree consists only of strings with given substring: {checkResult}.\r\n";
+                        bool checkResult;
+                        var form = new ElementEntry<string>();
+                        string elem = string.Empty;
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            elem = ElementEntry<string>.Element;
+                            if (unmutable)
+                                checkResult = TreeUtils<string>.CheckForAll(unmutableTreeStr, node => node.Data.Contains(elem));
+                            else
+                                checkResult = TreeUtils<string>.CheckForAll(_treeStr, node => node.Data.Contains(elem));
+                            textBox.Text = $"Tree consists only of strings with given substring: {checkResult}.\r\n";
+                        }
+                    }
+                    catch (TreeException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

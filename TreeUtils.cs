@@ -31,6 +31,8 @@ namespace BalancedTreeLab
 
         public static bool Exists(ITree<T> tree, CheckDelegate<T> check)
         {
+            if (tree.IsEmpty)
+                throw new TreeUtilsException("Cannot apply Exists method for an empty tree");
             foreach (var node in tree.Nodes)
             {
                 if (node != null)
@@ -45,6 +47,8 @@ namespace BalancedTreeLab
         public static ITree<T> FindAll(ITree<T> tree, CheckDelegate<T> check,
             TreeConstructorDelegate createTree)
         {
+            if (tree.IsEmpty)
+                throw new TreeUtilsException("Cannot apply FindAll method for an empty tree");
             var result = createTree.Invoke();
 
             foreach (var node in tree.Nodes)
@@ -62,6 +66,8 @@ namespace BalancedTreeLab
             
         public static void ForEach(ITree<T> tree, ActionDelegate<T> action)
         {
+            if (tree.IsEmpty)
+                throw new TreeUtilsException("Cannot apply ForEach method for an empty tree");
             foreach (var node in tree.Nodes)
             {
                 if (node != null)
@@ -71,6 +77,8 @@ namespace BalancedTreeLab
 
         public static bool CheckForAll(ITree<T> tree, CheckDelegate<T> check)
         {
+            if (tree.IsEmpty)
+                throw new TreeUtilsException("Cannot apply CheckForAll method for an empty tree");
             foreach (var node in tree.Nodes)
             {
                 if (node != null)
