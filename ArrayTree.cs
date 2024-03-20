@@ -100,8 +100,8 @@ namespace BalancedTreeLab
                     arr[GetLeftChildIndex(i)] = node.Left;
                 if (node.Right != null && GetRightChildIndex(i) < capacity)
                     arr[GetRightChildIndex(i)] = node.Right;
-                RearrangeArr(node.Left, 2 * i + 1);
-                RearrangeArr(node.Right, 2 * i + 2);
+                RearrangeArr(node.Left, GetLeftChildIndex(i));
+                RearrangeArr(node.Right, GetRightChildIndex(i));
             }
         }
 
