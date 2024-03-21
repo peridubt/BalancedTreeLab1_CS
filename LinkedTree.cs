@@ -118,6 +118,7 @@ namespace BalancedTreeLab
         public void Add(T data)
         {
             root = AddToRoot(root, data);
+            Count++;
         }
 
         Node<T> FindMin(Node<T> node)
@@ -163,6 +164,7 @@ namespace BalancedTreeLab
             if (data == null || !Contains(data))
                 throw new TreeElementRemovalDenial("Cannot remove a non-existent element");
             root = RemoveFromRoot(root, data);
+            Count--;
         }
 
         public bool Contains(T data)
@@ -190,6 +192,7 @@ namespace BalancedTreeLab
             if (IsEmpty)
                 throw new TreeModificationDenial("Cannot clear an empty tree");
             ClearRec(root);
+            Count = 0;
         }
     }
 }

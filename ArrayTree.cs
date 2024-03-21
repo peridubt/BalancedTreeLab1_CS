@@ -156,6 +156,7 @@ namespace BalancedTreeLab
                 Array.Clear(arr, 1, capacity - 1);
             arr[0] = AddToRoot(arr[0], data);
             RearrangeArr(arr[0], 0);
+            
         }
 
         Node<T> FindMin(Node<T> node)
@@ -211,9 +212,8 @@ namespace BalancedTreeLab
         {
             foreach (var elem in Nodes)
             {
-                if (elem != null)
-                    if (elem.Data.Equals(node))
-                        return true;
+                if (elem.Data.Equals(node))
+                    return true;
             }
             return false;
         }
@@ -225,7 +225,5 @@ namespace BalancedTreeLab
             Array.Clear(arr, 0, capacity);
             Count = 0;
         }
-
-        
     }
 }
