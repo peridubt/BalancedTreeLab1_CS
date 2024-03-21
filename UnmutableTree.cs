@@ -19,30 +19,26 @@ namespace BalancedTreeLab
 
         public void Add(T node)
         {
-            throw new TreeModificationDenial("This tree cannot be modified!");
+            throw new TreeModificationDenial("This tree cannot be modified");
         }
 
         public void Clear()
         {
-            throw new TreeModificationDenial("This tree cannot be modified!");
+            throw new TreeModificationDenial("This tree cannot be modified");
         }
 
         public bool Contains(T node)
         {
-            throw new TreeModificationDenial("This tree cannot be modified!");
-        }
-        public void Remove(T node)
-        {
-            throw new TreeModificationDenial("This tree cannot be modified!");
-        }
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            throw new NotImplementedException();
+            throw new TreeModificationDenial("This tree cannot be modified");
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public void Remove(T node)
         {
-            throw new NotImplementedException();
+            throw new TreeModificationDenial("This tree cannot be modified");
         }
+
+        public IEnumerator<Node<T>> GetEnumerator() => Nodes.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

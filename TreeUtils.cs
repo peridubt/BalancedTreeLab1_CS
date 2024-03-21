@@ -28,11 +28,8 @@ namespace BalancedTreeLab
                 throw new TreeUtilsException("Cannot apply Exists method for an empty tree");
             foreach (var node in tree.Nodes)
             {
-                if (node != null)
-                {
-                    if (check.Invoke(node))
-                        return true;
-                }
+                if (check.Invoke(node))
+                    return true;
             }
             return false;
         }
@@ -46,25 +43,21 @@ namespace BalancedTreeLab
 
             foreach (var node in tree.Nodes)
             {
-                if (node != null)
+                if (check.Invoke(node))
                 {
-                    if (check.Invoke(node))
-                    {
-                        result.Add(node.Data);
-                    }
+                    result.Add(node.Data);
                 }
             }
             return result;
         }
-            
+
         public static void ForEach(ITree<T> tree, ActionDelegate<T> action)
         {
             if (tree.IsEmpty)
                 throw new TreeUtilsException("Cannot apply ForEach method for an empty tree");
             foreach (var node in tree.Nodes)
             {
-                if (node != null)
-                    action.Invoke(node);
+                action.Invoke(node);
             }
         }
 
@@ -74,11 +67,8 @@ namespace BalancedTreeLab
                 throw new TreeUtilsException("Cannot apply CheckForAll method for an empty tree");
             foreach (var node in tree.Nodes)
             {
-                if (node != null)
-                {
-                    if (!check.Invoke(node))
-                        return false;
-                }
+                if (!check.Invoke(node))
+                    return false;
             }
             return true;
         }

@@ -9,7 +9,41 @@ namespace BalancedTreeLab
         private int capacity;
         public int Count { get; set; }
         public bool IsEmpty { get => Count == 0; }
-        public IEnumerable<Node<T>> Nodes { get => arr; set => Nodes = value; }
+        public IEnumerable<Node<T>> Nodes
+        {
+            get
+            {
+                if (IsEmpty)
+                    throw new TreeException("Cannot traverse an empty tree");
+                return DepthTraversal();
+            }
+            set => Nodes = value;
+        }
+
+        public IEnumerable<Node<T>> DepthTraversal()
+        {
+            if (arr[0] == null)
+                yield break;
+
+            var queue = new MyQueue<Node<T>>();
+            queue.Enqueue(arr[0]);
+            Node<T> node;
+            while (!queue.Empty())
+            {
+                node = queue.Peek();
+                queue.Dequeue();
+                yield return node;
+
+                if (node.Left != null)
+                    queue.Enqueue(node.Left);
+                if (node.Right != null)
+                    queue.Enqueue(node.Right);
+            }
+        }
+
+        public IEnumerator<Node<T>> GetEnumerator() => DepthTraversal().GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => Nodes.GetEnumerator();
 
         private int levels = 0;
         private int LeftChildIndex(int i) => 2 * i + 1;
@@ -192,14 +226,6 @@ namespace BalancedTreeLab
             Count = 0;
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            return (IEnumerator<T>)Nodes.AsEnumerable().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return Nodes.GetEnumerator();
-        }
+        
     }
 }

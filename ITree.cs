@@ -2,7 +2,7 @@
 
 namespace BalacnedTree
 {
-    public interface ITree<T> : IEnumerable<T> where T : IComparable<T>
+    public interface ITree<T> : IEnumerable<Node<T>> where T : IComparable<T>
     {
         int Count { get; }
         bool IsEmpty { get; }

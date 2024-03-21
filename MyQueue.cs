@@ -44,9 +44,8 @@ namespace BalancedTreeLab
             return result;
         }
 
-        public T Peek()
-        {
-            return head.Value;
-        }
+        public T Peek() => head.Value;
+
+        public bool Empty() => head == null;
     }
 }

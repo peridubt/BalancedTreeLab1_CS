@@ -1,20 +1,47 @@
 ﻿using BalacnedTree;
 using System.Collections;
-using System.Net;
 
 namespace BalancedTreeLab
 {
     public class LinkedTree<T> : ITree<T> where T : IComparable<T>
     {
         private Node<T> root = null;
-
-        private List<Node<T>> list = new List<Node<T>>();
-        public int Count { get => list.Count; }
+        public int Count { get; set; }
         public bool IsEmpty { get => Count == 0; }
-        public IEnumerable<Node<T>> Nodes { get => list; set => Nodes = value; }
+        public IEnumerable<Node<T>> Nodes
+        {
+            get
+            {
+                if (IsEmpty)
+                    throw new TreeException("Cannot traverse an empty tree");
+                return DepthTraversal();
+            }
+            set => Nodes = value;
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => (IEnumerator<T>)Nodes.GetEnumerator();
+        public IEnumerable<Node<T>> DepthTraversal()
+        {
+            if (root == null)
+                yield break;
+
+            var queue = new MyQueue<Node<T>>();
+            queue.Enqueue(root);
+            Node<T> node;
+            while (!queue.Empty())
+            {
+                node = queue.Peek();
+                queue.Dequeue();
+                yield return node;
+
+                if (node.Left != null)
+                    queue.Enqueue(node.Left);
+                if (node.Right != null)
+                    queue.Enqueue(node.Right);
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => Nodes.GetEnumerator();
+        public IEnumerator<Node<T>> GetEnumerator() => DepthTraversal().GetEnumerator();
 
         public LinkedTree() { }
 
@@ -78,7 +105,7 @@ namespace BalancedTreeLab
             if (node == null)
             {
                 Node<T> newNode = new Node<T>(data);
-                list.Add(newNode);
+                Count++;
                 return newNode;
             }
             if (data.CompareTo(node.Data) < 0)
@@ -88,19 +115,9 @@ namespace BalancedTreeLab
             return Balance(node);
         }
 
-        private void SwapRoot()
-        {
-            for (int i = 0; i < Count; ++i)
-            {
-                if (list[i].Equals(root))
-                    (list[i], list[0]) = (list[0], list[i]);
-            }
-        }
-
         public void Add(T data)
         {
             root = AddToRoot(root, data);
-            SwapRoot();
         }
 
         Node<T> FindMin(Node<T> node)
@@ -116,13 +133,6 @@ namespace BalancedTreeLab
             return Balance(node);
         }
 
-        void DelFromList(T data)
-        {
-            for (int i = 0; i < Count; ++i)
-                if (list[i].Data.Equals(data))
-                    list.RemoveAt(i);
-        }
-
         Node<T> RemoveFromRoot(Node<T> node, T data)
         {
             if (node == null)
@@ -135,7 +145,6 @@ namespace BalancedTreeLab
             {
                 Node<T> p = node.Left;
                 Node<T> q = node.Right;
-                DelFromList(data);
                 node = null;
                 if (q == null)
                     return p;
@@ -154,7 +163,6 @@ namespace BalancedTreeLab
             if (data == null || !Contains(data))
                 throw new TreeElementRemovalDenial("Cannot remove a non-existent element");
             root = RemoveFromRoot(root, data);
-            SwapRoot();
         }
 
         public bool Contains(T data)
@@ -181,7 +189,6 @@ namespace BalancedTreeLab
         {
             if (IsEmpty)
                 throw new TreeModificationDenial("Cannot clear an empty tree");
-            list.Clear();
             ClearRec(root);
         }
     }
