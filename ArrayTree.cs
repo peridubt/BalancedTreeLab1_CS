@@ -15,33 +15,22 @@ namespace BalancedTreeLab
             {
                 if (IsEmpty)
                     throw new TreeException("Cannot traverse an empty tree");
-                return DepthTraversal();
+                return ArrTraversal();
             }
             set => Nodes = value;
         }
 
-        public IEnumerable<Node<T>> DepthTraversal()
+        public IEnumerable<Node<T>> ArrTraversal()
         {
             if (arr[0] == null)
                 yield break;
 
-            var queue = new MyQueue<Node<T>>();
-            queue.Enqueue(arr[0]);
-            Node<T> node;
-            while (!queue.Empty())
-            {
-                node = queue.Peek();
-                queue.Dequeue();
-                yield return node;
-
-                if (node.Left != null)
-                    queue.Enqueue(node.Left);
-                if (node.Right != null)
-                    queue.Enqueue(node.Right);
-            }
+            for (int i = 0; i < capacity; ++i)
+                if (arr[i]!=null)
+                    yield return arr[i];
         }
 
-        public IEnumerator<Node<T>> GetEnumerator() => DepthTraversal().GetEnumerator();
+        public IEnumerator<Node<T>> GetEnumerator() => ArrTraversal().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => Nodes.GetEnumerator();
 
