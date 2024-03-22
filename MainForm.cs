@@ -16,8 +16,7 @@ namespace BalancedTreeLab
         delegate void ModificationDelegate<T>(T data);
         delegate void UtilsActionDelegate<T>(Node<T> node);
 
-        private string TreeBefore = string.Empty;
-        private string TreeAfter = string.Empty;
+        private string TreeVisuals = string.Empty;
 
         public MainForm()
         {
@@ -45,16 +44,7 @@ namespace BalancedTreeLab
 
         private void ViewExecution<T>(ITree<T> tree) where T : IComparable<T>
         {
-            string currentView = tree.IsEmpty ? "Empty balanced tree" : PrintTree(tree.Nodes.First());
-
-            if (TreeBefore == "")
-                TreeBefore = currentView;
-            else
-            {
-                if (TreeAfter != "")
-                    TreeBefore = TreeAfter;
-                TreeAfter = currentView;
-            }
+            TreeVisuals = tree.IsEmpty ? "Empty balanced tree" : PrintTree(tree.Nodes.First());
         }
 
         private void CreateArrayTreeInt_Click(object sender, EventArgs e)
@@ -628,7 +618,7 @@ namespace BalancedTreeLab
             else
             {
                 var visuals = new Visualizer();
-                visuals.ShowTree(TreeBefore, TreeAfter);
+                visuals.ShowTree(TreeVisuals);
                 visuals.Show();
             }
         }

@@ -9,10 +9,9 @@ namespace BalancedTreeLab
             InitializeComponent();
         }
 
-        public void ShowTree(string TreeBefore, string TreeAfter)
+        public void ShowTree(string TreeVisuals)
         {
-            textBoxBefore.Text = TreeBefore;
-            textBoxAfter.Text = TreeAfter;
+            textBoxView.Text = TreeVisuals;
         }
     }
 }

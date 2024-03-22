@@ -28,73 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxBefore = new System.Windows.Forms.TextBox();
-            this.textBoxAfter = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            textBoxView = new TextBox();
+            label1 = new Label();
+            SuspendLayout();
             // 
-            // textBoxBefore
+            // textBoxView
             // 
-            this.textBoxBefore.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.textBoxBefore.Location = new System.Drawing.Point(3, 33);
-            this.textBoxBefore.Multiline = true;
-            this.textBoxBefore.Name = "textBoxBefore";
-            this.textBoxBefore.ReadOnly = true;
-            this.textBoxBefore.Size = new System.Drawing.Size(653, 614);
-            this.textBoxBefore.TabIndex = 0;
-            // 
-            // textBoxAfter
-            // 
-            this.textBoxAfter.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.textBoxAfter.Location = new System.Drawing.Point(662, 33);
-            this.textBoxAfter.Multiline = true;
-            this.textBoxAfter.Name = "textBoxAfter";
-            this.textBoxAfter.ReadOnly = true;
-            this.textBoxAfter.Size = new System.Drawing.Size(653, 614);
-            this.textBoxAfter.TabIndex = 1;
+            textBoxView.Font = new Font("Microsoft Sans Serif", 16F);
+            textBoxView.Location = new Point(3, 58);
+            textBoxView.Margin = new Padding(4, 5, 4, 5);
+            textBoxView.Multiline = true;
+            textBoxView.Name = "textBoxView";
+            textBoxView.ReadOnly = true;
+            textBoxView.Size = new Size(869, 600);
+            textBoxView.TabIndex = 0;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label1.Location = new System.Drawing.Point(-3, -1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 31);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Before";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label2.Location = new System.Drawing.Point(656, -1);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 31);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "After";
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 20F);
+            label1.Location = new Point(3, 9);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(218, 39);
+            label1.TabIndex = 2;
+            label1.Text = "Current Tree:";
             // 
             // Visualizer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1319, 647);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxAfter);
-            this.Controls.Add(this.textBoxBefore);
-            this.Name = "Visualizer";
-            this.Text = "Visualizer";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(876, 663);
+            Controls.Add(label1);
+            Controls.Add(textBoxView);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "Visualizer";
+            Text = "Visualizer";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxBefore;
-        private System.Windows.Forms.TextBox textBoxAfter;
+        private System.Windows.Forms.TextBox textBoxView;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
     }
 }
