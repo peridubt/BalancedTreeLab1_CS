@@ -124,7 +124,7 @@ namespace BalancedTreeLab
             catch (TreeException ex)
             {
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox.Text += $"Failure: element \"{data}\" is not {actionMessage}!\r\n";
+                textBox.Text += $"Failure: element \"{data}\" was not {actionMessage}!\r\n";
             }
         }
 
