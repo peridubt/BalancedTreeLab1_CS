@@ -113,18 +113,18 @@ namespace BalancedTreeLab
             type = "string";
         }
 
-        private void ModifyTree<T>(T data, ITree<T> tree, ModificationDelegate<T> modify) where T : IComparable<T>
+        private void ModifyTree<T>(T data, ITree<T> tree, ModificationDelegate<T> modify, string actionMessage) where T : IComparable<T>
         {
             try
             {
                 modify.Invoke(data);
                 ViewExecution(tree);
-                textBox.Text += "Success!\r\n";
+                textBox.Text += $"Success: {actionMessage} element \"{data}\"!\r\n";
             }
             catch (TreeException ex)
             {
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox.Text += "Failure!\r\n";
+                textBox.Text += $"Failure: element \"{data}\" is not {actionMessage}!\r\n";
             }
         }
 
@@ -141,9 +141,9 @@ namespace BalancedTreeLab
                     {
                         string elem = ElementEntry<string>.Element;
                         if (unmutable == false)
-                            ModifyTree(elem, _treeStr, _treeStr.Add);
+                            ModifyTree(elem, _treeStr, _treeStr.Add, "added");
                         else
-                            ModifyTree(elem, unmutableTreeStr, unmutableTreeStr.Add);
+                            ModifyTree(elem, unmutableTreeStr, unmutableTreeStr.Add, "added");
                     }
                 }
                 else
@@ -153,9 +153,9 @@ namespace BalancedTreeLab
                     {
                         int elem = ElementEntry<int>.Element;
                         if (unmutable == false)
-                            ModifyTree(elem, _treeInt, _treeInt.Add);
+                            ModifyTree(elem, _treeInt, _treeInt.Add, "added");
                         else
-                            ModifyTree(elem, unmutableTreeInt, unmutableTreeInt.Add);
+                            ModifyTree(elem, unmutableTreeInt, unmutableTreeInt.Add, "added");
                     }
                 }
             }
@@ -174,9 +174,9 @@ namespace BalancedTreeLab
                     {
                         string elem = ElementEntry<string>.Element;
                         if (unmutable == false)
-                            ModifyTree(elem, _treeStr, _treeStr.Remove);
+                            ModifyTree(elem, _treeStr, _treeStr.Remove, "removed");
                         else
-                            ModifyTree(elem, unmutableTreeStr, unmutableTreeStr.Remove);
+                            ModifyTree(elem, unmutableTreeStr, unmutableTreeStr.Remove, "removed");
                     }
                 }
                 else
@@ -186,9 +186,9 @@ namespace BalancedTreeLab
                     {
                         int elem = ElementEntry<int>.Element;
                         if (unmutable == false)
-                            ModifyTree(elem, _treeInt, _treeInt.Remove);
+                            ModifyTree(elem, _treeInt, _treeInt.Remove, "removed");
                         else
-                            ModifyTree(elem, unmutableTreeInt, unmutableTreeInt.Remove);
+                            ModifyTree(elem, unmutableTreeInt, unmutableTreeInt.Remove, "removed");
                     }
                 }
             }
