@@ -117,6 +117,8 @@ namespace BalancedTreeLab
 
         public void Add(T data)
         {
+            if (!IsEmpty && Contains(data))
+                throw new TreeModificationDenial("Element is already in tree");
             root = AddToRoot(root, data);
             Count++;
         }
