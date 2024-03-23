@@ -16,7 +16,7 @@ namespace BalancedTreeLab
         delegate void ModificationDelegate<T>(T data);
         delegate void UtilsActionDelegate<T>(Node<T> node);
 
-        private string TreeVisuals = string.Empty;
+        string TreeVisuals = string.Empty;
 
         public MainForm()
         {
