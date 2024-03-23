@@ -8,19 +8,17 @@ namespace BalancedTreeLab
         public delegate void ActionDelegate<T>(Node<T> node);
         public delegate ITree<T> TreeConstructorDelegate();
 
-        public static ITree<T> ArrayTreeConstructor(TreeConstructorDelegate createArray)
+        public static readonly TreeConstructorDelegate ArrayTreeConstructor = () =>
         {
-            if (createArray == null)
-                throw new TreeCreationException("Delegate should be defined");
-            return createArray.Invoke();
-        }
+            ArrayTree<T> treeArr = [];
+            return treeArr;
+        };
 
-        public static ITree<T> LinkedTreeConstructor(TreeConstructorDelegate createLinked)
+        public static readonly TreeConstructorDelegate LinkedTreeConstructor = () =>
         {
-            if (createLinked == null)
-                throw new TreeCreationException("Delegate should be defined");
-            return createLinked.Invoke();
-        }
+            LinkedTree<T> treeLinked = [];
+            return treeLinked;
+        };
 
         public static bool Exists(ITree<T> tree, CheckDelegate<T> check)
         {
