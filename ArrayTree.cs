@@ -26,7 +26,7 @@ namespace BalancedTreeLab
                 yield break;
 
             for (int i = 0; i < capacity; ++i)
-                if (arr[i]!=null)
+                if (arr[i] != null)
                     yield return arr[i];
         }
 
@@ -147,7 +147,7 @@ namespace BalancedTreeLab
                 Array.Clear(arr, 1, capacity - 1);
             arr[0] = AddToRoot(arr[0], data);
             RearrangeArr(arr[0], 0);
-            
+
         }
 
         Node<T> FindMin(Node<T> node)
