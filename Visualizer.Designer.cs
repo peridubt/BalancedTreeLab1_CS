@@ -40,6 +40,7 @@
             textBoxView.Multiline = true;
             textBoxView.Name = "textBoxView";
             textBoxView.ReadOnly = true;
+            textBoxView.ScrollBars = ScrollBars.Both;
             textBoxView.Size = new Size(869, 600);
             textBoxView.TabIndex = 0;
             // 
