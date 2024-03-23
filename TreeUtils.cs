@@ -8,18 +8,6 @@ namespace BalancedTreeLab
         public delegate void ActionDelegate<T>(Node<T> node);
         public delegate ITree<T> TreeConstructorDelegate();
 
-        public static readonly TreeConstructorDelegate ArrayTreeConstructor = () =>
-        {
-            ArrayTree<T> treeArr = [];
-            return treeArr;
-        };
-
-        public static readonly TreeConstructorDelegate LinkedTreeConstructor = () =>
-        {
-            LinkedTree<T> treeLinked = [];
-            return treeLinked;
-        };
-
         public static bool Exists(ITree<T> tree, CheckDelegate<T> check)
         {
             if (tree.IsEmpty)
@@ -70,5 +58,18 @@ namespace BalancedTreeLab
             }
             return true;
         }
+
+        /*public static readonly TreeConstructorDelegate ArrayTreeConstructor = () =>
+        {
+            ArrayTree<T> treeArr = [];
+            return treeArr;
+        };
+
+        public static readonly TreeConstructorDelegate LinkedTreeConstructor = () =>
+        {
+            LinkedTree<T> treeLinked = [];
+            return treeLinked;
+        };
+        */
     }
 }
