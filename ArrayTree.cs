@@ -203,7 +203,7 @@ namespace BalancedTreeLab
         {
             foreach (var elem in Nodes)
             {
-                if (elem.Data.Equals(node))
+                if (elem.Data.CompareTo(node) == 0)
                     return true;
             }
             return false;

@@ -1,5 +1,6 @@
 ﻿using BalacnedTree;
 using System.Collections;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BalancedTreeLab
 {
@@ -29,7 +30,12 @@ namespace BalancedTreeLab
 
         public bool Contains(T node)
         {
-            throw new TreeModificationDenial("This tree cannot be modified");
+            foreach (var elem in Nodes)
+            {
+                if (elem.Data.CompareTo(node) == 0)
+                    return true;
+            }
+            return false;
         }
 
         public void Remove(T node)
