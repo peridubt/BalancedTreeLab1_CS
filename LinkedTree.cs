@@ -238,21 +238,11 @@ namespace BalancedTreeLab
             return false;
         }
 
-        private void ClearRec(Node<T> node)
-        {
-            if (node != null)
-            {
-                ClearRec(node.Left);
-                ClearRec(node.Right);
-                node = null;
-            }
-        }
-
         public void Clear()
         {
             if (IsEmpty)
                 throw new TreeModificationDenial("Cannot clear an empty tree");
-            ClearRec(root);
+            root = null;
             Count = 0;
         }
     }
