@@ -8,9 +8,9 @@ namespace BalacnedTree
         bool IsEmpty { get; }
         IEnumerable<Node<T>> Nodes { get; set; }
 
-        void Add(T node);
+        void Add(T data);
         void Clear();
-        bool Contains(T node);
-        void Remove(T node);
+        bool Contains(T data);
+        void Remove(T data);
     }
 }

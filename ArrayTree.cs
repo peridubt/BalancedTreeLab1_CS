@@ -199,11 +199,11 @@ namespace BalancedTreeLab
             RearrangeArr(arr[0], 0);
         }
 
-        public bool Contains(T node)
+        public bool Contains(T data)
         {
             foreach (var elem in Nodes)
             {
-                if (elem.Data.Equals(node))
+                if (elem.Data.CompareTo(data) == 0)
                     return true;
             }
             return false;

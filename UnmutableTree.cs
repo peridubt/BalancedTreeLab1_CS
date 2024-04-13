@@ -17,7 +17,7 @@ namespace BalancedTreeLab
 
         public IEnumerable<Node<T>> Nodes { get => tree.Nodes; set => throw new TreeModificationDenial("This tree cannot be modified!"); }
 
-        public void Add(T node)
+        public void Add(T data)
         {
             throw new TreeModificationDenial("This tree cannot be modified");
         }
@@ -27,12 +27,12 @@ namespace BalancedTreeLab
             throw new TreeModificationDenial("This tree cannot be modified");
         }
 
-        public bool Contains(T node)
+        public bool Contains(T data)
         {
             throw new TreeModificationDenial("This tree cannot be modified");
         }
 
-        public void Remove(T node)
+        public void Remove(T data)
         {
             throw new TreeModificationDenial("This tree cannot be modified");
         }

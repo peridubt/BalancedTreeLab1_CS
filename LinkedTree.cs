@@ -1,5 +1,6 @@
 ﻿using BalacnedTree;
 using System.Collections;
+using System.Xml.Linq;
 
 namespace BalancedTreeLab
 {
@@ -231,7 +232,7 @@ namespace BalancedTreeLab
         {
             foreach (var elem in Nodes)
             {
-                if (elem.Data.Equals(data))
+                if (elem.Data.CompareTo(data) == 0)
                     return true;
             }
             return false;
