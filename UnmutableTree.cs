@@ -32,7 +32,7 @@ namespace BalancedTreeLab
         {
             foreach (var elem in Nodes)
             {
-                if (elem.Data.CompareTo(node) == 0)
+                if (elem.Data.CompareTo(data) == 0)
                     return true;
             }
             return false;
