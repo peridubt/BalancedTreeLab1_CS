@@ -2,6 +2,53 @@
 
 namespace BalancedTreeLab
 {
+/*
+Задача 20:
+Сбалансированное дерево
+Разработать обобщенный класс Tree<T> – класс для описания сбаланси-
+рованного дерева.
+ITree <T>: IEnumerable<T> – базовый интерфейс для всех сбалансиро-
+ванных деревьев;
+o методы:
+ void Add (T node);
+ void Clear();
+ bool Contains (T node);
+ void Remove(T node);
+o свойства:
+ int Count;
+ bool isEmpty;
+ IEnumerable<T> nodes;
+
+ Tree Exception – класс, описывающий исключения, которые могут
+происходить в ходе работы со сбалансированным деревом (также
+можно написать ряд наследников от TreeException);
+ ArrayTree < T>: ITree < T > – класс сбалансированного дерева на ос-
+нове массива;
+ LinkedTree < T >: ITree < T > – класс сбалансированного дерева на
+основе связного списка;
+ UnmutableTree < T >: ITree < T > – класс неизменяющегося сбалан-
+сированного дерева, является оберткой над любым существующим
+деревом (должен кидаться исключениями на вызов любого метода,
+изменяющего дерево);
+ Tree Utils – класс различных операций над сбалансированным дере-
+вом;
+
+o методы:
+ static bool Exists< T >(ITree < T >, CheckDelegate< T >);
+ static ITree < T > FindAll< T >(ITree < T >,
+CheckDelegate<T>,TreeConstructorDelegate< T >);
+ static void ForEach(ITree < T >, ActionDelegate< T >);
+ static bool CheckForAll< T >(ITree < T >, CheckDelegate<>);
+o свойства:
+ static readonly TreeConstructorDelegate< T >
+ArrayTreeConstructor;
+ static readonly TreeConstructorDelegate< T >
+LinkedTreeConstructor;
+
+Также необходимо разработать серию примеров, демонстрирующих ос-
+новные аспекты работы с данной библиотекой сбалансированных де-
+ревьев.
+     */
     public partial class MainForm : Form
     {
         UnmutableTree<int> unmutableTreeInt;
